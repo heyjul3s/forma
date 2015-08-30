@@ -1,0 +1,81 @@
+<html lang="en-AU">
+<head>
+    <meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Form Validation via linked object pattern">
+    <meta name="author" content="Julian Low">
+    <title>Forma</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,900,700,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/grid.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="container">
+    	<div class="wrapper">
+			<header class="site-header">
+				<h1>
+					<strong>FORMA</strong>
+				</h1>
+				<p>form validation implementation via linked object pattern.</p>
+			</header>
+
+			<form id="form">
+				<div class="form-group comment-field">
+					<label for="comment">Comment</label>
+					<div class="txt-wrap">
+						<textarea id="comment" class="form-control" name="comment" cols="30" rows="10" placeholder="Say something." max-length="300"></textarea>
+						<span class="innerlay"></span>
+						<span class="char-count"></span>
+					</div>
+				</div>
+
+				<div class="form-group name-field">
+					<label for="name">Name</label>
+
+					<div class="input-wrap">
+						<input id="name" 
+							   class="form-control" 
+							   name="name"
+							   type="text"
+							   placeholder="Please enter a name."
+							   max-length="40">
+						<span class="innerlay"></span>
+						<span class="char-count"></span>
+					</div>
+				</div>
+
+				<div class="form-group email-field">
+					<label for="email">E-mail</label>
+					<div class="input-wrap">
+						<input id="email" 
+							   class="form-control" 
+							   name="email"
+							   type="email" 
+							   placeholder="Please enter your e-mail."
+							   max-length="40">
+						<span class="innerlay"></span>
+						<span class="char-count"></span>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<button id="submit" 
+							class="btn btn-default disabled"
+							type="submit" >
+							Submit
+					</button>
+				</div>
+				
+			</form>
+  		
+   		</div>
+    </div>
+    
+    <script src="js/forma_util.js"></script>
+    <script src="js/forma_counter.js"></script>
+    <script src="js/forma.js"></script>
+</body>
+</html>
