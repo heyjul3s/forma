@@ -23,9 +23,13 @@
 			
 		},
 		showCounter : function(counter) {
-			if ( !klass.has(counter, 'active') )  klass.add(counter, 'active');
+			if ( !klass.has(counter, 'active') )  {
+				klass.add(counter, 'active');
+			}
 		},
 		hideCounter : function(counter) {
-			if ( klass.has(counter, 'active') )  klass.remove(counter, 'active');
+			if ( klass.has(counter, 'active') )  {
+				klass.remove(counter, 'active');
+			}
 		}
 	};

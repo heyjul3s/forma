@@ -265,8 +265,6 @@
 
 
 
-
-
 		//FORMA
 		var forma = Object.create(validator);
 
@@ -283,6 +281,8 @@
 		forma.init = function() {
 			
 			var form = forma.id('form');
+			
+			forma.noSubmit( $id(document, 'submit') );
 
 			forma.counterEvents( form, 'focus keyup keydown', function(ev){
 				
@@ -292,6 +292,11 @@
 				);
 				
 			});
+			
+			form.addEventListener('submit', function(ev) {
+				ev.preventDefault();
+				return false;
+			}, true);
 
 			form.addEventListener('blur', function(ev){
 				
@@ -317,7 +322,6 @@
 				charCount.showCounter  ( $qr(parent, 'span.char-count') );
 				
 			}, true);	
-			
 		};
 
 
@@ -325,8 +329,5 @@
 
 		//Initialise
 		document.addEventListener('DOMContentLoaded', function() {
-			
-			forma.noSubmit( $id(document, 'submit') );
 			forma.init();
-			
 		}, false);
