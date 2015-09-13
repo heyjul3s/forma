@@ -17,6 +17,10 @@
 		}
 	};
 
+
+
+
+
 	// FORM CONFIGURATION
 	var formConfig = {
 		'name' : {
@@ -32,6 +36,10 @@
 			field : 'comment'
 		}
 	};
+
+
+
+
 
 	// CONFIG HANDLER
 	var configHandler = Object.create(Form);
@@ -50,7 +58,7 @@
 
 		configHandler.setup = function(config) {
 			
-			config = config || {};
+			var config   = config || {};
 			var inputObj = [];
 
 			for (var key in config) {
@@ -70,8 +78,11 @@
 			
 		};
 
+
+
+
+
 	// VALIDATOR
-	// houses validation methods and states
 	var validator = Object.create(configHandler);
 
 		validator.type = {
@@ -117,9 +128,9 @@
 
 		validator.isNeutral = function(removals, el) {
 			
-			var elem = el;
-			var elemClasses = [].slice.call(elem.classList);
-			var toRemove = removals.split(' ');
+			var elem 		= el,
+				elemClasses = [].slice.call(elem.classList),
+				toRemove 	= removals.split(' ');
 
 			if ( el === undefined || el === null ) {
 				return;
@@ -149,8 +160,8 @@
 		validator.processValObj = function(config) {
 
 			config = validator.setup(config);
-			var checks = [];
-			var vObjList = [];
+			var checks = [],
+				vObjList = [];
 
 			config.forEach(function(field, i){
 				checks.push(field);
@@ -169,12 +180,11 @@
 
 		validator.validateAllFields = function(config, ev){
 
-			var inputField = validator.target(ev);
-			var results = [];
+			var inputField = validator.target(ev),
+				results    = [];
 			
 			config.forEach(function(field, i){
-				console.log(field);
-				results.push(validator.confirmField(field));
+				results.push( validator.confirmField(field) );
 			});
 
 			return results;
@@ -214,8 +224,8 @@
 		//filter configs not specific to field for use in single field validation
 		validator.processFieldValObj = function(config, ev) {
 			
-			var inputField = validator.target(ev);
-			var fieldValObj = [];
+			var inputField  = validator.target(ev),
+				fieldValObj = [];
 
 			for (var i = 0; i < config.length; i += 1) {
 				if (config[i].ctrl === inputField) {
@@ -233,8 +243,8 @@
 
 			config.some(function(el, i){
 
-				var hintSpan 	  = $qr(el.ctrl.parentNode, 'span.indicator');
-				var otherHintSpan = $qr(el.ctrl.parentNode.parentNode, 'span.hint');
+				var hintSpan 	  = $qr( el.ctrl.parentNode, 'span.indicator' ),
+					otherHintSpan = $qr( el.ctrl.parentNode.parentNode, 'span.hint' );
 
 				if ( !validator.confirmField(el) ) {
 					errorTxt += el.check.hint;
@@ -253,6 +263,10 @@
 			
 		};
 
+
+
+
+
 		//FORMA
 		var forma = Object.create(validator);
 
@@ -270,37 +284,46 @@
 			
 			var form = forma.id('form');
 
-			forma.counterEvents(form, 'focus keyup keydown', function(ev){
+			forma.counterEvents( form, 'focus keyup keydown', function(ev){
+				
 				charCount.setupCounter(
 					forma.target(ev), 
 					$qr(forma.targetParent(ev), 'span.char-count')
 				);
+				
 			});
 
 			form.addEventListener('blur', function(ev){
+				
 				var formaConfig = forma.processValObj( formConfig );
 
-				forma.isSubmitable		( forma.validateAllFields  (formaConfig, ev)      );
+				forma.isSubmitable		( forma.validateAllFields  (formaConfig, ev)     );
 				forma.validateThisField ( forma.processFieldValObj (formaConfig, ev) 	 );
 				charCount.hideCounter	( $qr(forma.targetParent(ev), 'span.char-count') );
+				
 			}, true);
 
 			form.addEventListener('focus', function(ev){
-				var parent 			= forma.targetParent(ev);
-				var grandparent 	= forma.targetParent(ev).parentNode;
-				var fieldReady 		= forma.setupField.bind ( this, 'span' );
-				var neutraliseField = forma.isNeutral.bind  ( this, 'error success visible' );
+				
+				var parent 			= forma.targetParent(ev),
+					grandparent 	= forma.targetParent(ev).parentNode,
+					fieldReady 		= forma.setupField.bind ( this, 'span' ),
+					neutraliseField = forma.isNeutral.bind  ( this, 'error success visible' );
 
 				fieldReady	    	   ( 'indicator', parent 			);
 				fieldReady	    	   ( 'hint', grandparent 		    );
 				neutraliseField 	   ( $qr(parent, 'span.indicator') 	);
 				neutraliseField 	   ( $qr(grandparent, 'span.hint')  );
 				charCount.showCounter  ( $qr(parent, 'span.char-count') );
+				
 			}, true);	
 			
 		};
 
-		//fire that shit up
+
+
+
+		//Initialise
 		document.addEventListener('DOMContentLoaded', function() {
 			
 			forma.noSubmit( $id(document, 'submit') );

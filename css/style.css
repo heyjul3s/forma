@@ -2,6 +2,12 @@
 	box-sizing: border-box;
 }
 
+html {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
 html,
 body {
 	height: 100%;
@@ -11,6 +17,28 @@ body {
 	font-family: 'Titillium Web', sans-serif;
 	color: #333;
 	background-color: #002635;
+	overflow: auto;
+}
+
+footer.site-footer {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	padding: 30px 0;
+}
+
+a {
+	position: relative;
+	display: block;
+	outline: none;
+	color: #fff;
+	font-size: 1em;
+	font-weight: bold;
+	text-align: center;
+	text-decoration: none;
+	text-transform: uppercase;
+	text-shadow: 0 0 1px rgba(255, 255, 255, .3);
 }
 
 /*--------------------------------------------------------------
@@ -87,10 +115,24 @@ button.default {
 
 @media (min-width: 768px) {
 	div.wrapper {
-		margin-left: 33.33333333%;
-		margin-right: 33.33333333%;
+		margin-left: 16.666667%;
+		margin-right: 16.666667%;
 		padding-left: 15px;
 		padding-right: 15px;
+	}	
+}
+
+@media (min-width: 992px) {
+	div.wrapper {
+		margin-left: 25%;
+		margin-right: 25%;
+	}	
+}
+
+@media (min-width: 1200px) {
+	div.wrapper {
+		margin-left: 33.33333333%;
+		margin-right: 33.33333333%;
 	}	
 }
 
@@ -118,6 +160,9 @@ header.site-header p {
 --------------------------------------------------------------*/
 
 form#form {
+	display: block;
+	width: 100%;
+	height: auto;
 	margin-top: 50px;
 	margin-bottom: 50px;
 	padding: 25px;
@@ -163,14 +208,10 @@ textarea {
 label,
 input, 
 textarea {
-	-webkit-transition: opacity 300ms ease-out,
-					    text-indent 500ms ease-out,
-					    color 300ms ease-out,
-					    background 400ms ease-out;
-			transition: opacity 300ms ease-out,
-					    text-indent 500ms ease-out,
-					    color 300ms ease-out,
-					    background 400ms ease-out;
+	transition: opacity 300ms ease-out,
+				text-indent 500ms ease-out,
+				color 300ms ease-out,
+				background 400ms ease-out;
 }
 
 input,
@@ -178,7 +219,8 @@ textarea {
 	z-index: 20;
 }
 
-span.innerlay {
+span.innerlay,
+textarea ~ span.innerlay {
 	position: absolute;
 	top: 600%;
 	left: 0;
@@ -188,34 +230,17 @@ span.innerlay {
 	background: #FFF;
 	transform: scale(0);
 	opacity: 0;
-	-webkit-transition: opacity 300ms ease-out,
-						transform 300ms ease-out,
-						background-color 300ms ease-out;
-			transition: opacity 300ms ease-out,
-						transform 300ms ease-out,
-						background-color 300ms ease-out;
+	transition: opacity 300ms ease-out,
+				transform 450ms ease-out,
+				background-color 500ms ease-out;
 }
 
-span.innerlay2 {
-	
+span.innerlay {
+	top: 0;
 }
 
 textarea ~ span.innerlay {
-	position: absolute;
-	top: 200%;
-	left: 0;
-	width: 50px;
-	height: 50px;
-	border-radius: 50%;
-	background: #FFF;
-	transform: scale(0);
-	opacity: 0;
-	-webkit-transition: opacity 300ms ease-out,
-						transform 300ms ease-out,
-						background-color 300ms ease-out;
-			transition: opacity 300ms ease-out,
-						transform 300ms ease-out,
-						background-color 300ms ease-out;
+	top: 50%;
 }
 
 input:focus {
@@ -225,7 +250,7 @@ input:focus {
 }
 	input:focus ~ span.innerlay {
 		opacity: 1;
-		transform: scale(25);
+		transform: scale(18);
 	}
 
 textarea:focus {
@@ -235,15 +260,14 @@ textarea:focus {
 }
 	textarea:focus ~ span.innerlay {
 		opacity: 1;
-		transform: scale(30);
+		transform: scale(20);
 	}
 
 input::-webkit-input-placeholder,
 textarea::-webkit-input-placeholder {
 	text-indent: 0;
 	transition-delay: 200ms;
-		-webkit-transition: text-indent 500ms ease-out;
-				transition: text-indent 500ms ease-out;
+	transition: text-indent 500ms ease-out;
 }
 	input:focus::-webkit-input-placeholder,
 	textarea:focus::-webkit-input-placeholder {
@@ -256,8 +280,7 @@ input:-moz-placeholder,
 textarea:-moz-placeholder {
 	text-indent: 0;
 	transition-delay: 200ms;
-	-webkit-transition: text-indent 500ms ease-out;
-			transition: text-indent 500ms ease-out;
+	transition: text-indent 500ms ease-out;
 }
 	input:focus:-moz-placeholder,
 	textarea:focus:-moz-placeholder {
@@ -284,7 +307,7 @@ span.indicator {
 	left: 0;
 	width: 100px;
 	height: 100px;
-	padding-top: 7.25px;
+	padding-top: 7px;
 	padding-left: 15px;
 	color: #FFF;
 	background-color: transparent;
@@ -294,24 +317,21 @@ span.indicator {
 	text-align: right;
 	-webkit-transform: scale(0);
 			transform: scale(0);
-	-webkit-transition: opacity 300ms ease-out,
-						transform 300ms ease-out,
-						background 300ms ease-out;
-			transition: opacity 300ms ease-out,
-						transform 300ms ease-out,
-						background 300ms ease-out;
+	transition: opacity 300ms ease-out,
+				transform 500ms ease-out,
+				background 400ms ease-out;
 }
 
 span.indicator.error {
 	opacity: 1;
 	background: red;
-	transform: scale(12);
+	transform: scale(10);
 }
 
 span.indicator.success {
 	opacity: 1;
 	background: #1F8A70;
-	transform: scale(12);
+	transform: scale(10);
 }
 
 .visible ::-webkit-input-placeholder {
@@ -337,12 +357,9 @@ span.hint {
 	opacity: 0;
 	-webkit-transform: rotateX(180deg) translateY(50%);
 			transform: rotateY(180deg) translateY(50%);
-	-webkit-transition: color 300ms ease-out,
-						opacity 200ms ease-out,
-						transform 300ms ease-out;
-			transition: color 300ms ease-out,
-						opacity 200ms ease-out,
-						transform 300ms ease-out;
+	transition: color 300ms ease-out,
+				opacity 200ms ease-out,
+				transform 400ms ease-out;
 }
 
 span.hint.visible {
@@ -361,14 +378,12 @@ span.char-count {
 	background-color: transparent;
 	border-radius: 50%;
 	font-size: 13px;
-	font-weight: bold;
+	font-weight: bold;	
 	text-align: center;
 	-webkit-transform: translateY(200%) rotate(180deg);
 			transform: translateY(200%) rotate(180deg);;
-	-webkit-transition: transform 300ms ease-out,
-						background 500ms ease-out;
-			transition: transform 300ms ease-out,
-						background 500ms ease-out;
+	transition: transform 300ms ease-out,
+				background 500ms ease-out;
 }
 
 span.char-count.active {
@@ -376,7 +391,6 @@ span.char-count.active {
 	-webkit-transform:  translateY(0) rotate(0deg);
 			transform:  translateY(0) rotate(0deg);
 }
-
 
 input ~ span.char-count {
 	top: 10%;
